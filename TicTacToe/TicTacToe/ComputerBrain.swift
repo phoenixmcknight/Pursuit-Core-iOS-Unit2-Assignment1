@@ -1,9 +1,16 @@
+//
+//  File.swift
+//  TicTacToe
+//
+//  Created by Phoenix McKnight on 8/4/19.
+//  Copyright © 2019 Pursuit. All rights reserved.
+//
 
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ComputerBrain: UIViewController {
+    
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
@@ -16,44 +23,57 @@ class ViewController: UIViewController {
     
     @IBOutlet var buttonArray: [UIButton]!
     
-    @IBOutlet weak var pOneWinCount: UILabel!
+    //  Label for printing a mesaage to the MVC
     @IBOutlet weak var playersTurn: UILabel!
-    
-    @IBOutlet weak var pTwoWinCount: UILabel!
+    // Label for printing how many turns are left after a user triggers an IBAction
     @IBOutlet weak var turnsLeft: UILabel!
     var uiLabelArray:[UILabel] = []
     var allButtons:[UIButton] = []
     var playerOne:String!
     var playerTwo:String!
     var possibleOutcomesUILabels: [[UILabel]] = [[]]
-   var mod = Mod()
+    
+    
+    // an instance of the TicTacToeBrain Class
+    var ticTacToeBrain = TicTacToeBrain()
     
     var currentPlayer: PlayerSelector = .playerOne
     
     override func viewDidLoad() {
         
-    super.viewDidLoad()
-        
+        super.viewDidLoad()
+        // this sets all Labels to an array once the program starts
         uiLabelArray = [label1,label2,label3,label4,label5,label6,label7,label8,label9]
         possibleOutcomesUILabels = [[label1,label2,label3],
                                     [label4,label5,label6] , [label7,label8,label9], [label1,label5,label9],  [label2,label5,label8],[label3,label6,label9],[label3,label5,label7],
-                                        [label1,label4,label7]]
-    
+                                    [label1,label4,label7]]
+        // sets the alpha of each label in the array to 0 to be not visible
         uiLabelArray.forEach({$0.alpha = 0})
-        
-        playersTurn.text = "\(playerOne!), Begin!"
-        
+        // Displayed text when game starts
+        if playerOne == nil {
+            playersTurn.text = "Player One, Begin!"
+        } else {
+            playersTurn.text = "\(playerOne!), Begin!"
+        }
+        // sets the alpha to 0 to be not visible
         turnsLeft.alpha = 0
-  }
-
-    func disableButtons() {
-      buttonArray.forEach({$0.isEnabled = false})
     }
-
-    func enableButtons() {
-      buttonArray.forEach({$0.isEnabled = true})
+    //    func replace() {
+    //        for label in uiLabelArray where label.text == "" {
+    //            label.text = "X"
+    //            label.alpha = 0
+    //    }
+    //    }
+    func disableButtons() {
+        buttonArray.forEach({$0.isEnabled = false})
     }
     
+    func enableButtons() {
+        buttonArray.forEach({$0.isEnabled = true})
+    }
+    
+    // this function makes (turnsLeft) visible.
+    //sets the amount of moves left based on how many IBActions (buttons) are left.
     func howManyTurnsAreLeftFunc(){
         turnsLeft.alpha = 1
         switch allButtons.count{
@@ -68,32 +88,24 @@ class ViewController: UIViewController {
     
     func winCondition()  {
         for wins in possibleOutcomesUILabels {
-            if mod.X.contains(wins[0].text!) && mod.X.contains(wins[1].text!) && mod.X.contains(wins[2].text!)   {
+            if ticTacToeBrain.X.contains(wins[0].text!) && ticTacToeBrain.X.contains(wins[1].text!) && ticTacToeBrain.X.contains(wins[2].text!)   {
                 playersTurn.text = "\(playerOne!) wins!"
-                mod.incrementorX()
-                pOneWinCount.text = "Player One Wins :\(mod.playerOneWinCount)"
-               turnsLeft.alpha = 0
-                
-               disableButtons()
-                break
+                turnsLeft.alpha = 0
+                disableButtons()
             }
-            else if  mod.Y.contains(wins[0].text!) && mod.Y.contains(wins[1].text!) && mod.Y.contains(wins[2].text!)   {
-
+            else if  ticTacToeBrain.Y.contains(wins[0].text!) && ticTacToeBrain.Y.contains(wins[1].text!) && ticTacToeBrain.Y.contains(wins[2].text!)   {
+                
                 playersTurn.text = " \(playerTwo!) wins!"
                 turnsLeft.alpha = 0
-                mod.incrementorO()
-                pTwoWinCount.text = "Player Two Wins :\(mod.playerTwoWinCount)"
+                
                 disableButtons()
-            break
-            } else {
-                if allButtons.count == 9 {
+                
+            } else if allButtons.count == 9 {
                 playersTurn.text = "The game is a draw!"
             }
+        }
     }
-    }
-    }
-   
-   
+    
     
     @IBAction func ticTacToeButtons(_ sender: UIButton) {
         
@@ -101,55 +113,49 @@ class ViewController: UIViewController {
         case.playerOne:
             
             
-
-            uiLabelArray[sender.tag].text = currentPlayer.symbol()
+            
+            uiLabelArray[sender.tag].text = "X"
             uiLabelArray[sender.tag].alpha = 1
             sender.isEnabled = false
             allButtons += [sender]
-           
-            playersTurn.text = "\(playerTwo!)'s turn"
-            
+            if playerOne == nil {
+                playerOne = "Player One"
+            } else {
+                playersTurn.text = "\(playerOne!)'s turn"
+            }
             howManyTurnsAreLeftFunc()
             currentPlayer = .playerTwo
             winCondition()
             
         case .playerTwo:
-            uiLabelArray[sender.tag].text = currentPlayer.symbol()
+            
+            uiLabelArray[sender.tag].text = "O"
             uiLabelArray[sender.tag].alpha = 1
             sender.isEnabled = false
             allButtons += [sender]
-            playersTurn.text = "\(playerOne!)'s turn"
             
+            if playerTwo == nil {
+                playerTwo = "Player Two"
+            } else {
+                playersTurn.text = "\(playerTwo!)'s turn"
+            }
             howManyTurnsAreLeftFunc()
             currentPlayer = .playerOne
             winCondition()
-            }
         }
-    
-    
-    @IBAction func newGame(_ sender: UIButton) {
-
-        uiLabelArray.forEach({$0.alpha = 0})
-        uiLabelArray.forEach({$0.text = ""})
-        allButtons.forEach({$0.isEnabled = true})
-        allButtons = []
-        turnsLeft.alpha = 0
-        currentPlayer = .playerOne
-        playersTurn.text = "\(playerOne!), Begin!"
-
-       enableButtons()
-}
-    @IBAction func backToMainScreen(_ sender: UIButton) {
-        uiLabelArray.forEach({$0.alpha = 0})
-        uiLabelArray.forEach({$0.text = ""})
-        allButtons.forEach({$0.isEnabled = true})
-        allButtons = []
-        turnsLeft.alpha = 0
-        currentPlayer = .playerOne
-        playersTurn.text = "\(playerOne!), Begin!"
-        mod.reset()
-        enableButtons()
     }
     
+    @IBAction func newGame(_ sender: UIButton) {
+        
+        uiLabelArray.forEach({$0.alpha = 0})
+        uiLabelArray.forEach({$0.text = ""})
+        allButtons.forEach({$0.isEnabled = true})
+        allButtons = []
+        playersTurn.text = "Player One Start"
+        turnsLeft.alpha = 0
+        currentPlayer = .playerOne
+        
+        enableButtons()
+    }
 }
 

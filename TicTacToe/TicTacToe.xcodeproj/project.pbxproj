@@ -13,7 +13,8 @@
 		57A2EF4E2194DBB0009B12CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57A2EF4D2194DBB0009B12CA /* Assets.xcassets */; };
 		57A2EF512194DBB0009B12CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57A2EF4F2194DBB0009B12CA /* LaunchScreen.storyboard */; };
 		57A2EF592194DBFD009B12CA /* GameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2EF582194DBFD009B12CA /* GameButton.swift */; };
-		57A2EF5B2194DC83009B12CA /* TicTacToeBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2EF5A2194DC83009B12CA /* TicTacToeBrain.swift */; };
+		57A2EF5B2194DC83009B12CA /* mod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2EF5A2194DC83009B12CA /* mod.swift */; };
+		85E04E0922F3B23E00E77A9B /* PlayerSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E04E0822F3B23E00E77A9B /* PlayerSelector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +26,8 @@
 		57A2EF502194DBB0009B12CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57A2EF522194DBB0009B12CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57A2EF582194DBFD009B12CA /* GameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameButton.swift; sourceTree = "<group>"; };
-		57A2EF5A2194DC83009B12CA /* TicTacToeBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeBrain.swift; sourceTree = "<group>"; };
+		57A2EF5A2194DC83009B12CA /* mod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mod.swift; sourceTree = "<group>"; };
+		85E04E0822F3B23E00E77A9B /* PlayerSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +63,9 @@
 				57A2EF462194DBAF009B12CA /* AppDelegate.swift */,
 				57A2EF482194DBAF009B12CA /* ViewController.swift */,
 				57A2EF4A2194DBAF009B12CA /* Main.storyboard */,
+				85E04E0822F3B23E00E77A9B /* PlayerSelector.swift */,
 				57A2EF582194DBFD009B12CA /* GameButton.swift */,
-				57A2EF5A2194DC83009B12CA /* TicTacToeBrain.swift */,
+				57A2EF5A2194DC83009B12CA /* mod.swift */,
 				57A2EF4D2194DBB0009B12CA /* Assets.xcassets */,
 				57A2EF4F2194DBB0009B12CA /* LaunchScreen.storyboard */,
 				57A2EF522194DBB0009B12CA /* Info.plist */,
@@ -144,7 +147,8 @@
 				57A2EF492194DBAF009B12CA /* ViewController.swift in Sources */,
 				57A2EF592194DBFD009B12CA /* GameButton.swift in Sources */,
 				57A2EF472194DBAF009B12CA /* AppDelegate.swift in Sources */,
-				57A2EF5B2194DC83009B12CA /* TicTacToeBrain.swift in Sources */,
+				85E04E0922F3B23E00E77A9B /* PlayerSelector.swift in Sources */,
+				57A2EF5B2194DC83009B12CA /* mod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
